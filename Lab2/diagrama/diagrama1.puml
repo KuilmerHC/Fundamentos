@@ -5,7 +5,7 @@ class Usuario{
     -nombre: String
     -correo: String
     -telefono: String
-    +Usuario(String, String, String)>
+    +Usuario(String, String, String)
     +toString(): String
 }
 
@@ -48,11 +48,11 @@ enum EstadoBoleto{
 
 class Boleto{
     -id: int
-    -precio: long
+    -precio: double
     -estado: EstadoBoleto
     -concierto: Concierto
     -asiento: Asiento
-    +Boleto(int, long, EstadoBoleto, Concierto, Asiento)
+    +Boleto(int, double, EstadoBoleto, Concierto, Asiento)
     +setEstado(EstadoBoleto): void
     +toString(): String
 }
@@ -66,10 +66,10 @@ class Compra{
 }
 
 class SistemaVentas{
-    +buscarConciertos(String, LocalDate, String): List<Concierto>
-    +seleccionarAsiento(Concierto, int): Asiento
-    +comprarBoleto(Usuario, List<Boleto>): Compra
-    +confirmacionCompra(Compra): String
+    +buscarConciertos(nombre: String, fecha: LocalDate, artista: String): List<Concierto>
+    +seleccionarAsiento(Concierto, numeroAsiento: int): Asiento
+    +comprarBoleto(usr: Usuario, boletos: List<Boleto>): Compra
+    +confirmacionCompra(compra: Compra): String
 }   
 
 Boleto -> EstadoBoleto: usa
@@ -80,9 +80,9 @@ Usuario ..> SistemaVentas: usa
 SistemaVentas ..> Compra: crea
 SistemaVentas ..> Concierto: consulta
 
-Usuario "1" --> "1..*" Compra
+Usuario "1..*" --o "1..*" Compra: registra
 Compra "1" --> "1..*" Boleto
-Boleto "1..*" --> "1" Concierto: pertenecen a:
-Concierto "1" --> "1" Lugar: tiene
+Boleto "1..*" --* "1" Concierto: son parte de
+Concierto "1..*" --o "1" Lugar: necesita
 Boleto "1" --> "1" Asiento: tiene
 @enduml
