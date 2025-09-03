@@ -1,5 +1,10 @@
 package Lab2.src;
 
+/* 
+ * Clase que crea Objetos de Lugar
+ * @author Kuilmer
+ */
+
 public class Lugar {
     private String nombre;
     private String direccion;
@@ -25,7 +30,6 @@ public class Lugar {
         return capacidad;
     } 
     
-
     
     @Override
     public String toString() {

@@ -1,5 +1,10 @@
 package Lab2.src;
 
+/* 
+ * Clase que crea Objetos de Lugar
+ * @author Kuilmer
+ */
+
 public class Usuario {
     private String nombre;
     private String correo;

@@ -6,6 +6,7 @@ class Usuario{
     -correo: String
     -telefono: String
     +Usuario(String, String, String)
+    +getNombre(): String
     +toString(): String
 }
 
@@ -15,8 +16,34 @@ class Concierto{
     -hora: LocalTime
     -lugar: Lugar
     -artistas: List<String>
-    -boletos: List<Boleto>
-    +Concierto(String, LocalDate, LocalTime, Lugar)
+    -Boletos: List<Boleto>
+    +Concierto(String, LocalDate, LocalTime, Lugar, List<String>)
+    +getNombre(): String
+    +getFecha(): LocalDate
+    +getArtistas(): List<String>
+    +getLugar(): Lugar
+    +getBoletosDisponibles(): List<Boleto>
+    +toString(): String
+}
+
+enum EstadoBoleto{
+    Disponible,
+    Vendido
+}
+
+class Boleto{
+    -id: int
+    -precio: double
+    -estado: EstadoBoleto
+    -asiento: Asiento
+    -concierto: Concierto
+    +Boleto(int, double, EstadoBoleto, Asiento, Concierto)
+    +getId(): int
+    +getPrecio(): double
+    +getEstado(): EstadoBoleto
+    +getAsiento(): Asiento
+    +getConcierto(): Concierto
+    +setEstado(EstadoBoleto): void
     +toString(): String
 }
 
@@ -25,6 +52,9 @@ class Lugar{
     -direccion: String
     -capacidad: int
     +Lugar(String, String, int)
+    +getNombre(): String
+    +getDireccion(): String
+    +getCapacidad(): int
     +toString(): String
 }
 
@@ -38,30 +68,23 @@ class Asiento{
     -fila: String
     -tipo: TipoAsiento
     +Asiento(int, String, TipoAsiento)
+    +getNumero(): int
+    +getFila(): String
+    +getTipo(): String
     +toString(): String
 }
 
-enum EstadoBoleto{
-    Disponible,
-    Vendido
-}
-
-class Boleto{
-    -id: int
-    -precio: double
-    -estado: EstadoBoleto
-    -concierto: Concierto
-    -asiento: Asiento
-    +Boleto(int, double, EstadoBoleto, Concierto, Asiento)
-    +setEstado(EstadoBoleto): void
-    +toString(): String
-}
 
 class Compra{
     -usuario: Usuario
     -boletosComprados: List<Boleto>
     -fecha: LocalDate
+    -total: double
     +Compra(Usuario, List<Boleto>, LocalDate)
+    +getUsuario(): String
+    +getBoletosComprados(): List<Boletos>
+    +getTotal(): double
+    +getFecha(): LocalDate
     +toString(): String
 }
 
@@ -76,12 +99,11 @@ Boleto -> EstadoBoleto: usa
 Asiento -> TipoAsiento: usa
 
 
-Usuario ..> SistemaVentas: usa
-SistemaVentas ..> Compra: crea
+SistemaVentas ..> Compra: usa
 SistemaVentas ..> Concierto: consulta
 
 Usuario "1..*" --o "1..*" Compra: registra
-Compra "1" --> "1..*" Boleto
+Compra "1" --> "1..*" Boleto: tiene
 Boleto "1..*" --* "1" Concierto: son parte de
 Concierto "1..*" --o "1" Lugar: necesita
 Boleto "1" --> "1" Asiento: tiene

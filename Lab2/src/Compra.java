@@ -3,6 +3,12 @@ package Lab2.src;
 import java.time.LocalDate;
 import java.util.List;
 
+
+/* 
+ * Clase que crea Objetos de Compra
+ * @author Kuilmer
+ */
+
 public class Compra {
     private Usuario usuario;
     private List<Boleto> boletoscomprados;
@@ -16,8 +22,9 @@ public class Compra {
         this.total = 0;
         
     /*
-     *    1. Calcula el valor total de los boletos
+     * 1. Calcula el valor total de los boletos
      * 2. Cambia el estado de los boletos.
+     * 3. Guardo el total en el atributo de Compra.
      */
     for (Boleto boleto: boletoscomprados){
         boleto.setEstado(EstadoBoleto.Vendido);
@@ -27,11 +34,11 @@ public class Compra {
     }
 
     /* Getters */
-        public Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public List<Boleto> getBoletoscomprados() {
+    public List<Boleto> getBoletosComprados() {
         return boletoscomprados;
     }
 
@@ -39,11 +46,15 @@ public class Compra {
         return total;
     }
 
+     public LocalDate getFecha() {
+        return fecha;
+    }
+
+
     @Override
     public String toString() {
         return "Compra del usuario: " + usuario + ", boletoscomprados: " + boletoscomprados + ", fecha: " + fecha + ", total: " + total;
     }
-
     
     
 }

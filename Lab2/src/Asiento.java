@@ -1,5 +1,10 @@
 package Lab2.src;
 
+/* 
+ * Clase que crea Objetos de Asientos
+ * @author Kuilmer
+ */
+
 public class Asiento {
     private int numero;
     private String fila;

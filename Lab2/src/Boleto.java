@@ -1,20 +1,28 @@
 package Lab2.src;
 
+/* 
+ * Clase que crea Objetos de Boleto
+ * @author Kuilmer
+ */
+
 public class Boleto {
     private int id;
     private double precio;
     private EstadoBoleto estado;
-    private Concierto concierto;
     private Asiento asiento;
+    private Concierto concierto;
 
-
-    public Boleto(int id, double precio, Asiento asiento) {
+    /*
+     * El Estado del Asiento será Disponible cuando se crea.
+     */
+    
+    public Boleto(int id, double precio, Asiento asiento, Concierto concierto) {
         this.id = id;
         this.precio = precio;
-        this.estado = EstadoBoleto.Disponible;
         this.asiento = asiento;
+        this.estado = EstadoBoleto.Disponible;
+        this.concierto = concierto;
     }
-
 
     /* Getters */
     public int getId() {
@@ -33,7 +41,10 @@ public class Boleto {
         return asiento;
     }
 
-    
+    public Concierto getConcierto() {
+        return concierto;
+    }
+
     /*
      * Setter -> Cambiar el estado por Vendido
      */
@@ -43,9 +54,7 @@ public class Boleto {
 
     @Override
     public String toString() {
-        return "Boleto = id: " + id + ", precio: " + precio + ", estado: " + estado + ", concierto: " + concierto
-                + ", asiento: " + asiento;
+        return "\n Boleto = id: " + id + ", precio: " + precio + ", estado: " + estado;
     }
 
-    
 }
