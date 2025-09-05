@@ -1,0 +1,46 @@
+@startuml Ej3
+title Diagrama Sistema Clínica Citas Médicas
+
+class Paciente{
+    -id: int
+    -nombre: String
+    -fechaNacimiento: String
+    -dirección: String
+    -telefono: String
+    +Paciente(int, String, String, String, String)
+    +toString(): String
+}
+
+class Medico{
+    -id: int
+    -nombre: String
+    -especialidad: String
+    -horario: String
+    +Medico(int, String, String, String)
+    +toString(): String
+}
+
+class Cita{
+    -fecha: String
+    -hora: String
+    -paciente: Paciente
+    -medico: Medico
+    +Cita(String, String, Paciente, Medico)
+    +toString(): String
+    +solicitarCita(p: Paciente, m: Medico, fecha: String, hora: String): Cita
+    +cancelarCita(c: Cita): void
+}
+
+
+class Sistema{
+    -listaCitas: list<Cita>
+    +buscarCitaPaciente(): void
+    +buscarCitaMedico(): void
+    +buscarCitaFecha(): void
+    +cancelarCita(): void
+}
+
+Sistema ..> Cita: usa
+Paciente "1" --o "1..*" Cita: registra
+Medico "1" o-- "1..*" Cita: tiene
+@enduml
