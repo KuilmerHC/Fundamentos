@@ -93,22 +93,22 @@ class SistemaVentas{
     -listaConcierto: List<Concierto>
     -listaCompras: List<Compra>
     +main(): void static
-    +buscarConciertos(nombre: String, fecha: LocalDate, artista: String): void
+    +buscarConciertos(nombre: String, fecha: LocalDate, artista: String): Concierto
     +seleccionarAsiento(Concierto, numeroAsiento: int): void
     +comprarBoleto(usr: Usuario, boletos: List<Boleto>): void
     +confirmacionCompra(compra: Compra): void
 }   
 
-Boleto -> EstadoBoleto: usa
-Asiento -> TipoAsiento: usa
+Boleto .> EstadoBoleto: usa
+Asiento .> TipoAsiento: usa
 
 
 SistemaVentas ..> Compra: usa
 SistemaVentas ..> Concierto: consulta
 
-Usuario "1..*" --o "1..*" Compra: registra
+Usuario "1..*" <--o "1..*" Compra: registra
 Compra "1" *--> "1..*" Boleto: tiene
-Boleto "1..*" <--* "1" Concierto: son parte de
-Concierto "1..*" --o "1" Lugar: necesita
-Boleto "1" --> "1" Asiento: tiene
+Boleto "1..*" <--* "1" Concierto: vende
+Concierto "1..*" o--> "1..*" Lugar: necesita
+Boleto "1" <-- "1" Asiento: tiene
 @enduml
