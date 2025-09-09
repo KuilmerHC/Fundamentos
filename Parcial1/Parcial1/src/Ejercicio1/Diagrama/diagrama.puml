@@ -40,9 +40,12 @@ class Tiquete{
     -fechaCompra: LocalDate
     -numeroDeSilla: String
     -estado: Estado
-    +Tiquete(int, String)
+    -vuelo: Vuelo
+    +Tiquete(int, String, Vuelo)
     +getTiquete(): Tiquete
+    +getFechaCompra(): void
     +setEstado(Estado): void
+    +setFechaCompra(): void
     +toString(): String
 }
 
@@ -50,7 +53,6 @@ class Ciudad{
     -codigo: String
     -nombre: String
     +Ciudad(String, String)
-    +getCodigo(): String
     +getNombre(): String
     +toString(): String
 }
@@ -60,7 +62,7 @@ class Compra{
     -pasajero: Pasajero
     -tiquetesComprados: List<Tiquete>
     +Compra(Pasajero, List<Tiquete>)
-    +agregarBoleto(): void
+    +agregarTiquete(): void
     +getPasajero(): String
     +getTotal(): double
     +getFecha(): LocalDate
