@@ -1,0 +1,101 @@
+@startuml Kuilmer Santiago Hernandez Cruz & Juan José Berrio Español
+title Diagrama Hospital Universitario
+
+class Paciente{
+  - idPaciente: int
+  - nombre: String
+  - edad: int 
+  - tipoEnfermedad: TipoEnfermedad 
+  - estadoActual: EstadoPaciente 
+  - tipoGenero: Genero 
+  - historialTratamiento: List <Tratamiento> 
+  - resultadoExamen: List<Examen>
+  + Paciente (int, String, int, TipoEnfermedad, Estado)
+  + getIdPaciente(): idPaciente   
+  + getTipoGenero(): tipoGenero
+  + getTipoEnfermedad(): tipoEnfermedad 
+  + getEstadoActual(): EstadoPaciente
+  + agregarExamen(): void
+  + agregarTratamiento(): void
+  + toString (): String
+}
+
+enum TipoEnfermedad{
+  Hipertension,
+  Cardiopatia,
+  Insuficiencia,
+  Cardiaca
+}
+
+enum EstadoPaciente{
+  Tratamiento,
+  En_Remision, 
+  Hospitalizacion
+}
+
+enum GeneroPaciente {
+  Mujer,
+  Hombre
+}
+
+enum TipoTratamiento{
+    Medicamentos,
+    Cirugia,
+    Terapia
+}
+
+enum TipoExamen{
+    Electrocardiograma,
+    RayosX,
+    Cateterismo,
+    Holter
+}
+
+class Examen{
+    -id: int
+    -fecha: LocalTime
+    -tipoExamen: TipoExamen
+    -resultado: String
+    +Examen(int, TipoExamen, String)
+    +toString(): String
+}
+
+
+class Tratamiento{
+    -tipo: TipoTratamiento
+    -id: int
+    -nombre: String
+    -duracionDias: int
+    -efectosSecundarios: String
+    +Tratamiento(int, String, int, String)
+    +calcularEficacia(): void
+    +toString(): String
+}
+
+
+
+class Hospital{
+    -listaPacientes: List<Paciente>
+    +main(): void static
+    + registrarPaciente (): void
+    + agregarExamenPaciente () : void
+    + agregarTratamientoPaciente () : void
+    + numeroPacientesMujer (): void
+    + porcentajePacienteEstado (): void
+
+} 
+
+
+Hospital .> Paciente: usa
+
+Paciente .> TipoEnfermedad
+Paciente .> EstadoPaciente
+Paciente .> GeneroPaciente
+
+Examen .> TipoExamen
+
+Tratamiento .> TipoTratamiento
+
+Paciente "1" *--> "1..*" Examen: registra
+Paciente "1" *--> "1..*" Tratamiento: registra
+@enduml
