@@ -1,5 +1,6 @@
 package Ejercicio1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -7,25 +8,30 @@ import java.util.List;
  * @KuilmerHC
  */
 public class Compra {
-    private Pasajero usuario;
-    private Tiquete tiqueteComprado;
+    private Pasajero pasajero;
+    private List<Tiquete> tiquetesComprados;
 
+    public Compra(Pasajero pasajero) {
+        this.pasajero = pasajero;
+        this.tiquetesComprados = new ArrayList<>();
+    }
 
-    public Compra(Pasajero usuario, Tiquete tiqueteComprado) {
-        this.usuario = usuario;
-        this.tiqueteComprado = tiqueteComprado;
-
+    /*
+     * Método para agregar tiquetes a la compra
+     */
+    public void agregarTiquete(Tiquete tiquete) {
+        this.tiquetesComprados.add(tiquete);
     }
 
     /*
      * Getters
      */
-    public Pasajero getUsuario() {
-        return usuario;
+    public Pasajero getPasajero() {
+        return pasajero;
     }
 
-    public Tiquete getTiquete(){
-        return tiqueteComprado;
+    public List<Tiquete> getTiquetesComprados() {
+        return tiquetesComprados;
     }
 
     /*
@@ -33,9 +39,7 @@ public class Compra {
      */
     @Override
     public String toString() {
-        return "Compra [usuario=" + usuario + ", tiquetesComprados=" + tiqueteComprado + "]";
+        return "Compra [usuario=" + pasajero + ", tiquetesComprados=" + tiquetesComprados + "]";
     }
 
-    
-    
 }

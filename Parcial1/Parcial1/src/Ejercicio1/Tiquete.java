@@ -2,7 +2,6 @@ package Ejercicio1;
 
 import java.time.LocalDate;
 
-
 /* 
  * Clase crea OBjetos de Tiquete
  * @author KuilmerHC
@@ -15,8 +14,7 @@ public class Tiquete {
     private String numeroDeSilla;
     private Estado estado;
 
-
-    public Tiquete(int numero,Vuelo vuelo, String numeroDeSilla) {
+    public Tiquete(int numero, Vuelo vuelo, String numeroDeSilla) {
         this.numero = numero;
         this.vuelo = vuelo;
         this.fechaDeCompra = LocalDate.now();
@@ -35,7 +33,7 @@ public class Tiquete {
     /*
      * Getters
      */
-    
+
     public int getNumero() {
         return numero;
     }
@@ -52,7 +50,18 @@ public class Tiquete {
         return estado;
     }
 
+    public Vuelo getVuelo(){
+        return vuelo;
+    }
 
+    //
+    public void asignarPasajero(Pasajero pasajero) {
+        this.estado = Estado.Vendido;
+    }
+
+    public boolean isVendido() {
+        return this.estado == Estado.Vendido;
+    }
 
     /*
      * To string
@@ -63,6 +72,4 @@ public class Tiquete {
                 + ", estado=" + estado + "]";
     }
 
-
-    
 }

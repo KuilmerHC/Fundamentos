@@ -16,48 +16,53 @@ public class AppAgencia {
         Ciudad ciudad2 = new Ciudad("002", "Medellin");
 
         // Creación de Vuelos
-        Vuelo vuelo1 = new Vuelo(01, ciudad1, ciudad2, LocalTime.of(5, 30), LocalTime.of(7, 0), "1.30", 25);
+        Vuelo vuelo1 = new Vuelo(1, ciudad1, ciudad2, LocalTime.of(5, 30), LocalTime.of(7, 0), "1.30", 25);
+        vuelos.add(vuelo1);
 
         // Creación de 3 Pasajeros
         Pasajero pasajero1 = new Pasajero(1234, "Kuilmer", 19, "Masculino");
         Pasajero pasajero2 = new Pasajero(5678, "David", 29, "Masculino");
-        Pasajero pasajero3 = new Pasajero(0012, "Allison", 23, "Femenino");
+        Pasajero pasajero3 = new Pasajero(12, "Allison", 23, "Femenino");
 
-        // Asignar Pasajeros
-        Tiquete tiquete1 = vuelo1.getTiquetesDisponibles().get(0);
-        Tiquete tiquete2 = vuelo1.getTiquetesDisponibles().get(0);
-        Tiquete tiquete3 = vuelo1.getTiquetesDisponibles().get(0);
-
-        Compra compra1 = new Compra(pasajero1, tiquete1);
+        // Cada pasajero compra un tiquete del vuelo
+        Compra compra1 = new Compra(pasajero1);
+        Tiquete tiquete1 = vuelo1.comprarTiqueteDisponible(pasajero1);
+        compra1.agregarTiquete(tiquete1);
         compras.add(compra1);
 
-        Compra compra2 = new Compra(pasajero2, tiquete2);
+        Compra compra2 = new Compra(pasajero2);
+        Tiquete tiquete2 = vuelo1.comprarTiqueteDisponible(pasajero2);
+        compra2.agregarTiquete(tiquete2);
         compras.add(compra2);
 
-        Compra compra3 = new Compra(pasajero3, tiquete3);
+        Compra compra3 = new Compra(pasajero3);
+        Tiquete tiquete3 = vuelo1.comprarTiqueteDisponible(pasajero3);
+        compra3.agregarTiquete(tiquete3);
         compras.add(compra3);
 
-        // Buscar un pasajero por identificación en el vuelo
-        int idBusqueda = 1234; // Cambia este valor para buscar otro pasajero
-        Tiquete tiqueteEncontrado = null;
-        for (Tiquete t : vuelo1.getListaTiquetes()) {
-            if (t.getPasajero() != null && t.getPasajero().getIdentificacion() == idBusqueda) {
-                tiqueteEncontrado = t;
-                break;
+        // Buscar un pasajero en un vuelo y mostrar sus datos y número de silla
+        int idBusqueda = 1234; // Cambia por el id que quieras buscar
+        boolean encontrado = false;
+        for (Compra compra : compras) {
+            if (compra.getPasajero().getId() == idBusqueda) {
+                for (Tiquete t : compra.getTiquetesComprados()) {
+                    if (t.getVuelo().getNumero() == vuelo1.getNumero()) {
+                        Pasajero p = compra.getPasajero();
+                        System.out.println("Pasajero encontrado:");
+                        System.out.println("Identificación: " + p.getId());
+                        System.out.println("Nombre: " + p.getNombre());
+                        System.out.println("Edad: " + p.getEdad());
+                        System.out.println("Género: " + p.getGenero());
+                        System.out.println("Número de silla: " + t.getNumeroDeSilla());
+                        encontrado = true;
+                    }
+                }
             }
         }
-        
-        if (tiqueteEncontrado != null) {
-            Pasajero p = tiqueteEncontrado.getPasajero();
-            System.out.println("Pasajero encontrado:");
-            System.out.println("Identificación: " + p.getIdentificacion());
-            System.out.println("Nombre: " + p.getNombre());
-            System.out.println("Edad: " + p.getEdad());
-            System.out.println("Género: " + p.getGenero());
-            System.out.println("Número de silla: " + tiqueteEncontrado.getNumeroAsiento());
-        } else {
+        if (!encontrado) {
             System.out.println("Pasajero no encontrado en el vuelo.");
         }
 
+        vuelo1.mostrarTiquetesDisponibles();
     }
 }

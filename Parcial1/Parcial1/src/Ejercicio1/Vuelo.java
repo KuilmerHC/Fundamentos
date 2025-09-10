@@ -18,8 +18,8 @@ public class Vuelo {
     private int numeroDeSillas;
     private List<Tiquete> listaTiquetes;
 
-
-    public Vuelo(int numero, Ciudad ciudadSalida, Ciudad ciudadDestino, LocalTime horaDeSalida, LocalTime horaDeLlegada, String duracion, int nSillas) {
+    public Vuelo(int numero, Ciudad ciudadSalida, Ciudad ciudadDestino, LocalTime horaDeSalida, LocalTime horaDeLlegada,
+            String duracion, int nSillas) {
         this.numero = numero;
         this.ciudadSalida = ciudadSalida;
         this.ciudadDestino = ciudadDestino;
@@ -32,8 +32,8 @@ public class Vuelo {
     }
 
     /*
-    * Crear Tiquetes del Vuelo según la cantidad de sillas en el Vuelo (avión)
-    */
+     * Crear Tiquetes del Vuelo según la cantidad de sillas en el Vuelo (avión)
+     */
     private void crearTiquetes() {
         for (int i = 1; i <= numeroDeSillas; i++) {
             listaTiquetes.add(new Tiquete(i, this, "#Numero: " + i));
@@ -53,7 +53,6 @@ public class Vuelo {
         return disponibles;
     }
 
-    
     /*
      * Getters
      * 
@@ -79,18 +78,43 @@ public class Vuelo {
         return listaTiquetes;
     }
 
-
-    /* 
-     * Boletos Disponibles
+    /*
+     * Cambiar Estado
      */
+    public void cambiarEstado(Tiquete tiquete) {
+        tiquete.setEstado(Estado.Vendido);
+    }
 
-
-    public void mostrarTiquetesDisponibles(){
+    /*
+     * Tiquetes Disponibles
+     */
+    public void mostrarTiquetesDisponibles() {
         for (Tiquete tiquete : listaTiquetes) {
             if (tiquete.getEstado().equals(Estado.Disponible))
                 System.out.println(tiquete);
         }
     }
+
+    public Tiquete buscarTiquete(int numero) {
+        for (Tiquete tiquete : listaTiquetes) {
+            if (tiquete.getNumero() == numero)
+                return tiquete;
+        }
+        System.out.println("Error! El Numero de Tiquete NO Exise");
+        return null;
+    }
+
+    // Método para asignar un tiquete disponible a un pasajero
+    public Tiquete comprarTiqueteDisponible(Pasajero pasajero) {
+        for (Tiquete t : listaTiquetes) {
+            if (!t.isVendido()) {
+                t.asignarPasajero(pasajero);
+                return t;
+            }
+        }
+        return null; // No hay tiquetes disponibles
+    }
+
 
     /*
      * To string
@@ -101,7 +125,5 @@ public class Vuelo {
                 + ", horaDeSalida=" + horaDeSalida + ", horaDeLlegada=" + horaDeLlegada + ", duracionVuelo="
                 + duracion + ", numeroDeSillas=" + numeroDeSillas + ", listaTiquetes=" + listaTiquetes + "]";
     }
-    
-    
-    
+
 }
