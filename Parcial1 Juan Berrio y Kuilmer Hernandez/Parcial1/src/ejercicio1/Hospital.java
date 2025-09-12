@@ -1,5 +1,9 @@
 package ejercicio1;
 
+/*
+ * @author @KuilmerHernandez & @JuanBerrio
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +72,9 @@ public class Hospital {
         return contador;
     }
 
+    /* 
+     * Diccionario de Estado y Cantidad de Pacientes.
+     */
     public static void imprimirPorcentajePacientesPorEstado() {
         if (pacientes.isEmpty()) {
             System.out.println("No hay pacientes registrados.");
@@ -87,7 +94,7 @@ public class Hospital {
         for (EstadoPaciente estado : EstadoPaciente.values()) {
             int cantidad = conteo.getOrDefault(estado, 0);
             double porcentaje = (cantidad * 100.0) / total;
-            System.out.printf("- %s: %.1f%% (%d pacientes)%n", estado, porcentaje, cantidad);
+            System.out.printf("- %s: %.0f%% (%d pacientes)%n", estado, porcentaje, cantidad);
         }
     }
 

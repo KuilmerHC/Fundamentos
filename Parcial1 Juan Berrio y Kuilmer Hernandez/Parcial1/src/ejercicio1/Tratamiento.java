@@ -1,4 +1,7 @@
 package ejercicio1;
+/*
+ * @author @KuilmerHernandez & @JuanBerrio
+ */
 
 public class Tratamiento {
     private TipoTratamiento tipo;
@@ -16,11 +19,6 @@ public class Tratamiento {
         this.duracionDias = duracionDias;
         this.efectosSecundarios = efectosSecundarios;
     }
-    
-    public void calcularEficacia(){
-        
-    }
-
     
 
 }

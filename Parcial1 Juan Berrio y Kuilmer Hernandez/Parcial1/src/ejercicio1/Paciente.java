@@ -1,5 +1,9 @@
 package ejercicio1;
 
+/*
+ * @author @KuilmerHernandez & @JuanBerrio
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 
