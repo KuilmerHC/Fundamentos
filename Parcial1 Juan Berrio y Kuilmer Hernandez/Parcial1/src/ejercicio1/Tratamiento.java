@@ -18,7 +18,7 @@ public class Tratamiento {
     }
     
     public void calcularEficacia(){
-
+        
     }
 
     

@@ -87,7 +87,7 @@ public class Hospital {
         for (EstadoPaciente estado : EstadoPaciente.values()) {
             int cantidad = conteo.getOrDefault(estado, 0);
             double porcentaje = (cantidad * 100.0) / total;
-            System.out.printf("- %s: %.2f%% (%d pacientes)%n", estado, porcentaje, cantidad);
+            System.out.printf("- %s: %.1f%% (%d pacientes)%n", estado, porcentaje, cantidad);
         }
     }
 
